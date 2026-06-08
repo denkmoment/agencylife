@@ -120,7 +120,7 @@ em.amber{font-style:italic}
 .rules .r{padding:1.5vh 0;border-bottom:1px solid var(--hair)}
 .rules .r:last-child{border:none}
 .rules h3{font-family:var(--serif);font-size:clamp(17px,2vw,26px);color:var(--body)}
-.rules h3:before{content:"‚Äî ";color:var(--amber-d)}
+.rules h3:before{content:"&#8212; ";color:var(--amber-d)}
 .rules p{font-family:var(--sans);font-size:clamp(12px,1.2vw,15px);color:var(--mute);margin-top:.4vh;margin-left:1.4em}
 
 /* fail */
@@ -151,98 +151,98 @@ em.amber{font-style:italic}
 <div id="count" class="counter-dark"><span id="cur">01</span> / <span id="tot">24</span></div>
 <div id="brand">How to Agencylife</div>
 <div id="dots"></div>
-<div id="nav"><button id="prev" aria-label="zur√ºck">&larr;</button><button id="next" aria-label="weiter">&rarr;</button></div>
+<div id="nav"><button id="prev" aria-label="zur&#252;ck">&larr;</button><button id="next" aria-label="weiter">&rarr;</button></div>
 
 <script>
 const A='<em class="amber">', _A='</em>'; // amber italic helper
 const slides = [
 /*1*/{cls:'dark',html:`<div data-reveal><div class="t-how">HOW TO</div>
   <div class="t-title">Agencylife</div>
-  <div class="sub" style="margin-top:0">Das h√§tte ich gern gewusst, bevor ich angefangen habe.</div>
-  <div class="t-meta" style="margin-top:3vh">Simon &nbsp;¬∑&nbsp; Client Service &nbsp;¬∑&nbsp; seit 4 Jahren hier</div></div>`},
+  <div class="sub" style="margin-top:0">Das h&#228;tte ich gern gewusst, bevor ich angefangen habe.</div>
+  <div class="t-meta" style="margin-top:3vh">Simon &nbsp;&#183;&nbsp; Client Service &nbsp;&#183;&nbsp; seit 4 Jahren hier</div></div>`},
 /*2*/{cls:'dark',k:'Mein erster Tag',html:`<div class="statement dim" data-reveal>9:03 Uhr.</div>
   <div class="statement big" data-reveal style="margin:1vh 0">47 ungelesene Mails.</div>
-  <div class="statement dim" data-reveal style="font-size:clamp(20px,2.6vw,34px)">Drei mit <span class="amber">‚ÄûURGENT‚Äú</span> im Betreff.</div>`},
+  <div class="statement dim" data-reveal style="font-size:clamp(20px,2.6vw,34px)">Drei mit <span class="amber">&#8222;URGENT&#8220;</span> im Betreff.</div>`},
 /*3*/{cls:'dark',k:'Das erste Meeting',html:`<div class="statement big" data-reveal>Also nickte ich.</div>
-  <div class="sub" data-reveal style="color:var(--cream-dim);font-style:italic">Obwohl ich drei von f√ºnf W√∂rtern<br>nicht verstanden habe.</div>`},
-/*4*/{cls:'light',html:`<div class="statement" data-reveal>Wahrscheinlich kennst du<br>dieses Gef√ºhl <em class="amber">schon.</em></div>`},
+  <div class="sub" data-reveal style="color:var(--cream-dim);font-style:italic">Obwohl ich drei von f&#252;nf W&#246;rtern<br>nicht verstanden habe.</div>`},
+/*4*/{cls:'light',html:`<div class="statement" data-reveal>Wahrscheinlich kennst du<br>dieses Gef&#252;hl <em class="amber">schon.</em></div>`},
 /*5*/{cls:'light',k:'Im ersten Jahr ist das hier normal',html:`<ul class="list">
-  <li data-reveal><span class="b"></span>Du nickst bei Abk√ºrzungen, die du nicht kennst.</li>
-  <li data-reveal><span class="b"></span>Du liest eine Mail f√ºnfmal, bevor du auf Senden gehst.</li>
-  <li data-reveal><span class="b"></span>Du klappst Freitag das Notebook zu ‚Äî und nichts ist ‚Äûfertig‚Äú.</li>
+  <li data-reveal><span class="b"></span>Du nickst bei Abk&#252;rzungen, die du nicht kennst.</li>
+  <li data-reveal><span class="b"></span>Du liest eine Mail f&#252;nfmal, bevor du auf Senden gehst.</li>
+  <li data-reveal><span class="b"></span>Du klappst Freitag das Notebook zu &#8212; und nichts ist &#8222;fertig&#8220;.</li>
   <li data-reveal><span class="b"></span>Du fragst dich, ob nur du noch nicht durchblickst.</li></ul>
   <div class="kicker" data-reveal style="margin-top:3vh;margin-bottom:0">Spoiler: Es geht allen exakt so.</div>`},
-/*6*/{cls:'dark',k:'Mitmachen ¬∑ ganz ehrlich',html:`<div class="kicker" data-reveal style="margin-bottom:1.5vh">Hand hoch:</div>
-  <div class="statement" data-reveal>Wer hat heimlich das Gef√ºhl,<br>hier <em class="amber">nicht gut genug zu performen</em>?</div>
-  <div class="note" data-reveal>Behalt das Gef√ºhl. Am Ende zeige ich dir, warum es dein Vorteil ist.</div>`},
-/*7*/{cls:'dark',k:'Wenn du nur einen Satz mitnimmst',html:`<div class="statement" data-reveal>Am Anfang kommst du nicht √ºber <em class="amber">Wissen</em> voran.</div>
-  <div class="statement" data-reveal>Sondern √ºber <em class="amber">Beziehungen</em> und <em class="amber">Verl√§sslichkeit</em>.</div>
+/*6*/{cls:'dark',k:'Mitmachen &#183; ganz ehrlich',html:`<div class="kicker" data-reveal style="margin-bottom:1.5vh">Hand hoch:</div>
+  <div class="statement" data-reveal>Wer hat heimlich das Gef&#252;hl,<br>hier <em class="amber">nicht gut genug zu performen</em>?</div>
+  <div class="note" data-reveal>Behalt das Gef&#252;hl. Am Ende zeige ich dir, warum es dein Vorteil ist.</div>`},
+/*7*/{cls:'dark',k:'Wenn du nur einen Satz mitnimmst',html:`<div class="statement" data-reveal>Am Anfang kommst du nicht &#252;ber <em class="amber">Wissen</em> voran.</div>
+  <div class="statement" data-reveal>Sondern &#252;ber <em class="amber">Beziehungen</em> und <em class="amber">Verl&#228;sslichkeit</em>.</div>
   <div class="rule" data-reveal></div>
-  <div class="dim" data-reveal style="font-family:var(--serif);font-style:italic;font-size:clamp(17px,2vw,26px)">Und der Schl√ºssel zu beidem:</div>
+  <div class="dim" data-reveal style="font-family:var(--serif);font-style:italic;font-size:clamp(17px,2vw,26px)">Und der Schl&#252;ssel zu beidem:</div>
   <div class="statement big" data-reveal style="font-size:clamp(34px,5vw,64px)">die Maske abnehmen.</div>`},
 /*8*/{cls:'dark',divider:true,n:'01',title:'Vernetzen',sub:'Wie du in 90 Tagen zur bekanntesten Junior-Kraft wirst.'},
-/*9*/{cls:'light',k:'Die Wahrheit √ºber unseren Job',drehscheibe:true},
-/*10*/{cls:'light',k:'Dein Playbook f√ºr die ersten 90 Tage',html:`<div class="cards">
-  <div class="card" data-reveal><span class="num">01</span><h3>Kaffee-Tour.</h3><p>15 Min mit je einem Menschen aus jeder Unit. Frage: ‚ÄûWas nervt dich an Beratern?‚Äú</p></div>
+/*9*/{cls:'light',k:'Die Wahrheit &#252;ber unseren Job',drehscheibe:true},
+/*10*/{cls:'light',k:'Dein Playbook f&#252;r die ersten 90 Tage',html:`<div class="cards">
+  <div class="card" data-reveal><span class="num">01</span><h3>Kaffee-Tour.</h3><p>15 Min mit je einem Menschen aus jeder Unit. Frage: &#8222;Was nervt dich an Beratern?&#8220;</p></div>
   <div class="card" data-reveal><span class="num">02</span><h3>Geben vor Nehmen.</h3><p>Hilf, bevor du das erste Mal selbst etwas brauchst. Dann ist jede Bitte leicht.</p></div>
-  <div class="card" data-reveal><span class="num">03</span><h3>Frag die zweite Person.</h3><p>Nicht immer den Lead ‚Äî die Erfahrene daneben wei√ü mehr und freut sich, gefragt zu werden.</p></div>
+  <div class="card" data-reveal><span class="num">03</span><h3>Frag die zweite Person.</h3><p>Nicht immer den Lead &#8212; die Erfahrene daneben wei&#223; mehr und freut sich, gefragt zu werden.</p></div>
   <div class="card" data-reveal><span class="num">04</span><h3>Iss nicht nur mit den Trainees.</h3><p>Setz dich bewusst zu den Units. 20 Min Mittag bauen mehr Beziehung als jedes Meeting.</p></div></div>`},
-/*11*/{cls:'dark',k:'Kurze Abstimmung',html:`<div class="statement big" data-reveal style="font-style:italic">‚ÄûFragen ist ein<br>Zeichen von Schw√§che.‚Äú</div>
+/*11*/{cls:'dark',k:'Kurze Abstimmung',html:`<div class="statement big" data-reveal style="font-style:italic">&#8222;Fragen ist ein<br>Zeichen von Schw&#228;che.&#8220;</div>
   <div class="kicker amber" data-reveal style="margin-top:3vh;margin-bottom:0">Daumen hoch oder runter?</div>`},
 /*12*/{cls:'light',html:`<div class="statement" data-reveal>Die Frage, die du dir <em class="amber">heute</em> nicht traust,</div>
-  <div class="statement" data-reveal>kostet dich <em class="amber">n√§chste Woche</em> zwei Stunden,</div>
+  <div class="statement" data-reveal>kostet dich <em class="amber">n&#228;chste Woche</em> zwei Stunden,</div>
   <div class="statement" data-reveal>in denen du das Falsche baust.</div>
   <div class="rule" data-reveal></div>
   <div class="dim" data-reveal style="font-family:var(--serif);font-style:italic;font-size:clamp(16px,1.9vw,24px)">Schweigen ist nicht sicherer. Nur langsamer und teurer.</div>`},
-/*13*/{cls:'dark',divider:true,n:'02',title:'Schnell reinkommen',sub:'Wie aus ‚Äûkeine Ahnung‚Äú in Wochen ‚Äûdie fragen wir‚Äú wird.'},
+/*13*/{cls:'dark',divider:true,n:'02',title:'Schnell reinkommen',sub:'Wie aus &#8222;keine Ahnung&#8220; in Wochen &#8222;die fragen wir&#8220; wird.'},
 /*14*/{cls:'dark',html:`<div class="fail"><div class="big-n" data-reveal>3 Tage</div>
   <div class="vs-word" data-reveal>gegen</div>
   <div class="small-n" data-reveal>30 Sekunden.</div></div>`},
-/*15*/{cls:'light',k:'Schnell reinkommen ‚Äî was wirklich hilft',html:`<div class="rows">
-  <div class="row" data-reveal><span class="b"></span><div><h3>Bau dein eigenes Wiki.</h3><p>Jede Abk√ºrzung, jedes Aha. Nie zweimal dasselbe fragen m√ºssen ‚Äî der gr√∂√üte Hebel.</p></div></div>
-  <div class="row" data-reveal><span class="b"></span><div><h3>Lies r√ºckw√§rts.</h3><p>Alte Pr√§sentationen & Mediapl√§ne dieses Kunden. ‚ÄûWarum 60 % auf Social?‚Äú lehrt mehr als jedes Lehrbuch.</p></div></div>
-  <div class="row" data-reveal><span class="b"></span><div><h3>‚ÄûErkl√§r's mir wie einem F√ºnfj√§hrigen.‚Äú</h3><p>Und sag es in eigenen Worten zur√ºck. Da fliegen Missverst√§ndnisse sofort auf.</p></div></div>
-  <div class="row" data-reveal><span class="b"></span><div><h3>Lern zuerst die KPIs.</h3><p>TKP, CPC, ROAS, Reichweite & Frequenz ‚Äî die gemeinsame Sprache des Hauses.</p></div></div></div>`},
-/*16*/{cls:'dark',divider:true,n:'03',title:'Haltung',sub:'Echt sein schl√§gt perfekt sein. Jeden Tag.'},
-/*17*/{cls:'dark',k:'Die wichtigste Wahrheit √ºber den Job',html:`<div class="statement big" data-reveal><em class="amber">Verl√§sslichkeit</em></div>
-  <div class="statement big" data-reveal>schl√§gt Brillanz.</div>
+/*15*/{cls:'light',k:'Schnell reinkommen &#8212; was wirklich hilft',html:`<div class="rows">
+  <div class="row" data-reveal><span class="b"></span><div><h3>Bau dein eigenes Wiki.</h3><p>Jede Abk&#252;rzung, jedes Aha. Nie zweimal dasselbe fragen m&#252;ssen &#8212; der gr&#246;&#223;te Hebel.</p></div></div>
+  <div class="row" data-reveal><span class="b"></span><div><h3>Lies r&#252;ckw&#228;rts.</h3><p>Alte Pr&#228;sentationen & Mediapl&#228;ne dieses Kunden. &#8222;Warum 60 % auf Social?&#8220; lehrt mehr als jedes Lehrbuch.</p></div></div>
+  <div class="row" data-reveal><span class="b"></span><div><h3>&#8222;Erkl&#228;r's mir wie einem F&#252;nfj&#228;hrigen.&#8220;</h3><p>Und sag es in eigenen Worten zur&#252;ck. Da fliegen Missverst&#228;ndnisse sofort auf.</p></div></div>
+  <div class="row" data-reveal><span class="b"></span><div><h3>Lern zuerst die KPIs.</h3><p>TKP, CPC, ROAS, Reichweite & Frequenz &#8212; die gemeinsame Sprache des Hauses.</p></div></div></div>`},
+/*16*/{cls:'dark',divider:true,n:'03',title:'Haltung',sub:'Echt sein schl&#228;gt perfekt sein. Jeden Tag.'},
+/*17*/{cls:'dark',k:'Die wichtigste Wahrheit &#252;ber den Job',html:`<div class="statement big" data-reveal><em class="amber">Verl&#228;sslichkeit</em></div>
+  <div class="statement big" data-reveal>schl&#228;gt Brillanz.</div>
   <div class="rule" data-reveal></div>
   <div class="dim" data-reveal style="font-family:var(--serif);font-style:italic;font-size:clamp(17px,2vw,26px)">Drei kluge Ideen sind weniger wert als zehn eingehaltene kleine Zusagen.</div>`},
 /*18*/{cls:'light',k:'Was keiner ins Handbuch schreibt',html:`<div class="rules">
-  <div class="r" data-reveal><h3>Bad news travel fast.</h3><p>Probleme meldest du als Erster ‚Äî sofort, mit L√∂sung.</p></div>
-  <div class="r" data-reveal><h3>No surprises.</h3><p>√úberrasch den Kunden nie. Auch nicht positiv im falschen Moment.</p></div>
-  <div class="r" data-reveal><h3>Antworte schnell ‚Äî auch ohne Antwort.</h3><p>‚ÄûHab's, melde mich bis 12 Uhr‚Äú schl√§gt zwei Tage Stille.</p></div>
-  <div class="r" data-reveal><h3>Owne deine Fehler.</h3><p>Sofort, ohne Schuldverlagerung, mit L√∂sung.</p></div></div>`},
-/*19*/{cls:'light',k:'Wo verl√§uft die Grenze zur Anbiederung?',html:`<div class="vs">
+  <div class="r" data-reveal><h3>Bad news travel fast.</h3><p>Probleme meldest du als Erster &#8212; sofort, mit L&#246;sung.</p></div>
+  <div class="r" data-reveal><h3>No surprises.</h3><p>&#220;berrasch den Kunden nie. Auch nicht positiv im falschen Moment.</p></div>
+  <div class="r" data-reveal><h3>Antworte schnell &#8212; auch ohne Antwort.</h3><p>&#8222;Hab's, melde mich bis 12 Uhr&#8220; schl&#228;gt zwei Tage Stille.</p></div>
+  <div class="r" data-reveal><h3>Owne deine Fehler.</h3><p>Sofort, ohne Schuldverlagerung, mit L&#246;sung.</p></div></div>`},
+/*19*/{cls:'light',k:'Wo verl&#228;uft die Grenze zur Anbiederung?',html:`<div class="vs">
   <div class="vs-col"><div class="vs-h echt" data-reveal>Echt</div>
-    <div class="vs-item echt" data-reveal>Du fragst, weil du es verstehen willst ‚Äî und merkst dir die Antwort.</div>
-    <div class="vs-item echt" data-reveal>‚ÄûDas wei√ü ich noch nicht ‚Äî ich finde es raus.‚Äú</div>
-    <div class="vs-item echt" data-reveal>‚ÄûDein Targeting hat die Pr√§si gerettet.‚Äú</div></div>
+    <div class="vs-item echt" data-reveal>Du fragst, weil du es verstehen willst &#8212; und merkst dir die Antwort.</div>
+    <div class="vs-item echt" data-reveal>&#8222;Das wei&#223; ich noch nicht &#8212; ich finde es raus.&#8220;</div>
+    <div class="vs-item echt" data-reveal>&#8222;Dein Targeting hat die Pr&#228;si gerettet.&#8220;</div></div>
   <div class="vs-col"><div class="vs-h auf" data-reveal>Aufgesetzt</div>
-    <div class="vs-item auf" data-reveal>Du suchst Vorw√§nde f√ºr ‚ÄûKaffee‚Äú, h√∂rst aber nicht zu.</div>
+    <div class="vs-item auf" data-reveal>Du suchst Vorw&#228;nde f&#252;r &#8222;Kaffee&#8220;, h&#246;rst aber nicht zu.</div>
     <div class="vs-item auf" data-reveal>Du nickst kompetent und bluffst dich durch.</div>
-    <div class="vs-item auf" data-reveal>‚ÄûSuper Arbeit, Team!‚Äú ‚Äî ohne zu wissen, was passiert ist.</div></div></div>`},
-/*20*/{cls:'dark',k:'An den gemischten Haufen hier',html:`<div class="dim" data-reveal style="font-family:var(--serif);font-size:clamp(18px,2.3vw,30px);font-style:italic">Manche denken: <span style="color:var(--cream);font-style:normal">‚ÄûIch kann noch nichts.‚Äú</span></div>
-  <div class="dim" data-reveal style="font-family:var(--serif);font-size:clamp(18px,2.3vw,30px);font-style:italic;margin-top:1.5vh">Andere: <span style="color:var(--cream);font-style:normal">‚ÄûIch kann die Theorie ‚Äî aber versage gleich in der Praxis.‚Äú</span></div>
+    <div class="vs-item auf" data-reveal>&#8222;Super Arbeit, Team!&#8220; &#8212; ohne zu wissen, was passiert ist.</div></div></div>`},
+/*20*/{cls:'dark',k:'An den gemischten Haufen hier',html:`<div class="dim" data-reveal style="font-family:var(--serif);font-size:clamp(18px,2.3vw,30px);font-style:italic">Manche denken: <span style="color:var(--cream);font-style:normal">&#8222;Ich kann noch nichts.&#8220;</span></div>
+  <div class="dim" data-reveal style="font-family:var(--serif);font-size:clamp(18px,2.3vw,30px);font-style:italic;margin-top:1.5vh">Andere: <span style="color:var(--cream);font-style:normal">&#8222;Ich kann die Theorie &#8212; aber versage gleich in der Praxis.&#8220;</span></div>
   <div class="rule" data-reveal></div>
-  <div class="statement" data-reveal>Beide halten den anderen f√ºr im Vorteil.</div>
+  <div class="statement" data-reveal>Beide halten den anderen f&#252;r im Vorteil.</div>
   <div class="statement" data-reveal><em class="amber">Beide irren.</em></div>`},
 /*21*/{cls:'light',k:'Alles dasselbe Prinzip',html:`<div class="kicker" data-reveal style="color:var(--mute);margin-bottom:2.5vh">Vernetzen. Schnell reinkommen. Haltung.</div>
-  <div class="statement big" data-reveal style="font-size:clamp(34px,5vw,60px)">H√∂r auf, souver√§n zu tun.</div>
+  <div class="statement big" data-reveal style="font-size:clamp(34px,5vw,60px)">H&#246;r auf, souver&#228;n zu tun.</div>
   <div class="statement big" data-reveal style="font-size:clamp(34px,5vw,60px);color:var(--amber-d)">Fang an, ehrlich zu fragen.</div>`},
 /*22*/{cls:'dark',k:'Jetzt seid ihr dran',html:`<div class="dim" data-reveal style="font-family:var(--serif);font-style:italic;font-size:clamp(18px,2vw,26px);margin-bottom:1.5vh">Handy oder Zettel.</div>
   <div class="statement" data-reveal>Eine Sache, die du<br>diese Woche ausprobierst.</div>
   <div data-reveal style="font-family:var(--serif);font-size:clamp(22px,3vw,38px);margin-top:2.5vh"><span class="dim" style="font-style:italic">Nicht zehn.</span> <em class="amber" style="font-weight:600">Eine.</em></div>`},
-/*23*/{cls:'dark',k:'Zur√ºck zum Anfang',html:`<div class="statement" data-reveal>Du wirst deine <em class="amber" style="font-style:normal;font-weight:500">47 Mails</em> kriegen.</div>
-  <div class="statement" data-reveal>Und du wirst sie schaffen ‚Äî</div>
-  <div class="dim" data-reveal style="font-family:var(--serif);font-style:italic;font-size:clamp(18px,2.2vw,30px);margin:1.5vh 0">nicht weil du alles wei√üt,</div>
+/*23*/{cls:'dark',k:'Zur&#252;ck zum Anfang',html:`<div class="statement" data-reveal>Du wirst deine <em class="amber" style="font-style:normal;font-weight:500">47 Mails</em> kriegen.</div>
+  <div class="statement" data-reveal>Und du wirst sie schaffen &#8212;</div>
+  <div class="dim" data-reveal style="font-family:var(--serif);font-style:italic;font-size:clamp(18px,2.2vw,30px);margin:1.5vh 0">nicht weil du alles wei&#223;t,</div>
   <div class="statement" data-reveal>sondern weil du die Frage stellst,</div>
   <div class="statement" data-reveal><em class="amber">die sich keiner traut.</em></div>`},
-/*24*/{cls:'light',k:'Deine Hausaufgabe f√ºr Woche 1',html:`<div class="statement big" data-reveal style="font-size:clamp(34px,5vw,62px)">Stell die eine Frage,</div>
-  <div class="statement big" data-reveal style="font-size:clamp(34px,5vw,62px);color:var(--amber-d)">vor der du dich dr√ºckst.</div>
+/*24*/{cls:'light',k:'Deine Hausaufgabe f&#252;r Woche 1',html:`<div class="statement big" data-reveal style="font-size:clamp(34px,5vw,62px)">Stell die eine Frage,</div>
+  <div class="statement big" data-reveal style="font-size:clamp(34px,5vw,62px);color:var(--amber-d)">vor der du dich dr&#252;ckst.</div>
   <div class="rule" data-reveal></div>
   <div data-reveal style="font-family:var(--serif);font-style:italic;font-size:clamp(17px,2vw,25px);color:var(--body)">Damit bist du den meisten Trainees ein Jahr voraus.</div>
-  <div class="kicker" data-reveal style="color:var(--mute);margin-top:4vh;margin-bottom:0;letter-spacing:.04em;text-transform:none;font-weight:400;font-family:var(--sans);font-size:13px">Jetzt geh√∂ren die letzten Minuten euch ‚Äî fragt mich irgendwas. Auch die ‚Äûdummen‚Äú. Besonders die.</div>`},
+  <div class="kicker" data-reveal style="color:var(--mute);margin-top:4vh;margin-bottom:0;letter-spacing:.04em;text-transform:none;font-weight:400;font-family:var(--sans);font-size:13px">Jetzt geh&#246;ren die letzten Minuten euch &#8212; fragt mich irgendwas. Auch die &#8222;dummen&#8220;. Besonders die.</div>`},
 ];
 
 const UNITS=["Strategy / Planning","Mediaplanung","SEA / Search","Social","Programmatic","Data / Analytics","Ad Operations"];
@@ -267,7 +267,7 @@ function buildSlide(s,i){
     wrap.innerHTML=`<div class="hub-wrap"><div class="hub-left">
         ${s.k?`<div class="kicker" data-reveal>${s.k}</div>`:''}
         <div class="statement" data-reveal>Du produzierst<br>nichts allein.</div>
-        <div class="sub" data-reveal style="color:var(--body);font-style:normal;font-family:var(--serif)">Du bist die <em class="amber" style="font-weight:600">Drehscheibe</em> ‚Äî deine Arbeit ist nur so gut wie die Zuarbeit, die du bekommst.</div>
+        <div class="sub" data-reveal style="color:var(--body);font-style:normal;font-family:var(--serif)">Du bist die <em class="amber" style="font-weight:600">Drehscheibe</em> &#8212; deine Arbeit ist nur so gut wie die Zuarbeit, die du bekommst.</div>
       </div>
       <div class="hub-stage" data-stage>${spokes}<div class="hub-core" data-fade><b>DU</b><span>Berater</span></div>${pills}</div></div>`;
   } else {
