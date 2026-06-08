@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Agencylife</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#141418; --ink-soft:#20202a; --card-dk:#1d1d26;
+  --cream:#f4f0e8; --cream-dim:#b7b1a4;
+  --amber:#d98a3d; --amber-d:#b96e26;
+  --body:#33333a; --mute:#8c877b; --hair:#ded8cc;
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'Inter',-apple-system,Segoe UI,Roboto,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;background:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+#deck{position:fixed;inset:0}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  padding:8vh 9vw;opacity:0;pointer-events:none;z-index:1}
+.slide.active{opacity:1;pointer-events:auto;z-index:2}
+.slide.leaving{opacity:0;pointer-events:none;transition:opacity .5s ease;z-index:1}
+.slide.dark{background:var(--ink);color:var(--cream)}
+.slide.light{background:var(--cream);color:var(--body)}
+.slide.center{align-items:flex-start}
+
+/* Reveal = gentle slide-up only. Opacity stays 1 ALWAYS, so content can never get stuck
+   invisible (even if transitions are frozen/disabled). Entrance is pure transform. */
+[data-reveal]{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.slide:not(.active) [data-reveal]{transform:translateY(16px)}
+.slide.active [data-reveal]{transform:none}
+
+/* grain */
+.grain{position:absolute;inset:0;pointer-events:none;opacity:.035;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+.kicker{font-family:var(--sans);font-weight:600;font-size:clamp(11px,1.05vw,14px);
+  letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin-bottom:3.5vh}
+.slide.light .kicker{color:var(--amber-d)}
+.tick{display:inline-block;width:7px;height:clamp(38px,5vh,60px);background:var(--amber);margin-bottom:2.4vh}
+
+.statement{font-family:var(--serif);font-weight:400;line-height:1.08;
+  font-size:clamp(30px,4.6vw,62px);letter-spacing:-.01em}
+.statement.big{font-size:clamp(40px,6.2vw,86px)}
+.sub{font-family:var(--serif);font-style:italic;color:var(--amber);
+  font-size:clamp(17px,2vw,26px);margin-top:3vh;line-height:1.3}
+.slide.dark .dim{color:var(--cream-dim)}
+.slide.light .dim{color:var(--mute)}
+.amber{color:var(--amber)}.slide.light .amber{color:var(--amber-d)}
+em.amber{font-style:italic}
+.note{font-family:var(--sans);font-size:clamp(13px,1.2vw,15px);color:var(--cream-dim);margin-top:4vh}
+.slide.light .note{color:var(--mute)}
+.rule{width:clamp(120px,18vw,300px);height:1px;background:rgba(244,240,232,.18);margin:3.2vh 0}
+.slide.light .rule{background:var(--hair)}
+
+/* title */
+.t-how{font-family:var(--sans);font-weight:700;letter-spacing:.16em;font-size:clamp(15px,1.6vw,21px);color:var(--cream-dim)}
+.t-title{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(58px,10vw,140px);line-height:.95;color:var(--cream);margin:1vh 0 3vh}
+.t-meta{font-family:var(--sans);font-size:clamp(12px,1.2vw,15px);color:var(--cream-dim);letter-spacing:.04em}
+
+/* list */
+.list{list-style:none;margin-top:1vh}
+.list li{display:flex;align-items:center;gap:2.2vw;padding:1.55vh 0;
+  font-family:var(--serif);font-size:clamp(18px,2.3vw,30px);line-height:1.25}
+.list li .b{flex:0 0 auto;width:6px;height:clamp(22px,3vh,40px);background:var(--amber)}
+.slide.light .list li .b{background:var(--amber-d)}
+
+/* ghost number divider */
+.ghost{position:absolute;left:5vw;top:4vh;font-family:var(--serif);font-weight:600;
+  font-size:30vw;line-height:1;color:var(--ink-soft);user-select:none;z-index:0}
+.divwrap{position:relative;z-index:2}
+.div-title{font-family:var(--serif);font-size:clamp(44px,7vw,90px);line-height:1;letter-spacing:-.01em}
+
+/* drehscheibe */
+.hub-wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:3vw;align-items:center;width:100%}
+.hub-left .statement{font-size:clamp(30px,4vw,54px)}
+.hub-stage{position:relative;height:64vh;min-height:380px}
+.hub-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:clamp(110px,12vw,150px);height:clamp(110px,12vw,150px);border-radius:50%;
+  background:var(--ink);color:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  box-shadow:0 10px 40px rgba(0,0,0,.18);z-index:3}
+.hub-core b{color:var(--amber);font-size:clamp(18px,2vw,24px);font-weight:700}
+.hub-core span{font-size:clamp(10px,1vw,13px);color:var(--cream);opacity:.8;margin-top:2px}
+.pill{position:absolute;background:#fff;border:1px solid var(--hair);border-radius:40px;
+  padding:.85vh 1.3vw;font-family:var(--sans);font-size:clamp(11px,1.05vw,14px);color:var(--body);
+  white-space:nowrap;box-shadow:0 4px 16px rgba(20,20,24,.05);transform:translate(-50%,-50%)}
+.spoke{position:absolute;left:50%;top:50%;height:1px;background:linear-gradient(90deg,rgba(217,138,61,.55),rgba(217,138,61,0));
+  transform-origin:0 0;z-index:1}
+
+/* cards 2x2 */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:1.6vw;margin-top:1vh}
+.card{background:#fff;border:1px solid var(--hair);border-left:5px solid var(--amber);
+  padding:2.6vh 1.8vw;display:flex;flex-direction:column;gap:.8vh}
+.card .num{font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.18em;color:var(--amber-d)}
+.card h3{font-family:var(--serif);font-weight:600;font-size:clamp(17px,1.9vw,24px);color:var(--body)}
+.card p{font-family:var(--sans);font-size:clamp(12px,1.15vw,15px);color:var(--mute);line-height:1.4}
+
+/* tech rows */
+.rows{margin-top:1vh}
+.row{display:flex;gap:1.8vw;padding:1.5vh 0;border-bottom:1px solid var(--hair)}
+.row:last-child{border-bottom:none}
+.row .b{flex:0 0 auto;width:5px;align-self:stretch;background:var(--amber-d)}
+.row h3{font-family:var(--serif);font-weight:600;font-size:clamp(17px,2vw,26px);color:var(--body)}
+.row p{font-family:var(--sans);font-size:clamp(12px,1.2vw,15px);color:var(--mute);margin-top:.5vh;line-height:1.4}
+
+/* vs grid */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:1.4vw;margin-top:1vh}
+.vs-h{font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.2vh}
+.vs-h.echt{color:#2c7a4b}.vs-h.auf{color:#b0492f}
+.vs-col{display:flex;flex-direction:column;gap:1.1vh}
+.vs-item{padding:1.7vh 1.3vw;font-family:var(--sans);font-size:clamp(12px,1.2vw,15px);line-height:1.35}
+.vs-item.echt{background:#fff;border:1px solid var(--hair);color:var(--body)}
+.vs-item.auf{background:#f0e7dd;border:1px solid #e2d3c4;color:#7a6e62;font-style:italic}
+
+/* rules list */
+.rules{margin-top:1vh}
+.rules .r{padding:1.5vh 0;border-bottom:1px solid var(--hair)}
+.rules .r:last-child{border:none}
+.rules h3{font-family:var(--serif);font-size:clamp(17px,2vw,26px);color:var(--body)}
+.rules h3:before{content:"‚Äî ";color:var(--amber-d)}
+.rules p{font-family:var(--sans);font-size:clamp(12px,1.2vw,15px);color:var(--mute);margin-top:.4vh;margin-left:1.4em}
+
+/* fail */
+.fail .big-n{font-family:var(--serif);font-size:clamp(80px,15vw,210px);line-height:.9;color:var(--cream)}
+.fail .vs-word{font-family:var(--serif);font-style:italic;color:var(--cream-dim);font-size:clamp(22px,3vw,40px);margin:1vh 0}
+.fail .small-n{font-family:var(--serif);font-style:italic;color:var(--amber);font-size:clamp(40px,7vw,90px)}
+
+/* chrome */
+#bar{position:fixed;top:0;left:0;height:3px;background:var(--amber);width:0;z-index:50;transition:width .5s cubic-bezier(.4,0,.2,1)}
+#count{position:fixed;bottom:3.2vh;left:9vw;font-family:var(--sans);font-size:12px;letter-spacing:.1em;z-index:40;color:var(--cream-dim)}
+.slide.light ~ #count{}
+#brand{position:fixed;bottom:3.2vh;left:50%;transform:translateX(-50%);font-family:var(--sans);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--cream-dim);opacity:.7;z-index:40}
+#nav{position:fixed;bottom:2.6vh;right:9vw;display:flex;gap:10px;z-index:40}
+#nav button{width:38px;height:38px;border:1px solid rgba(244,240,232,.25);background:transparent;color:var(--cream-dim);
+  border-radius:50%;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:.25s}
+#nav button:hover{border-color:var(--amber);color:var(--amber)}
+#dots{position:fixed;right:3.2vw;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:9px;z-index:40}
+#dots .d{width:7px;height:7px;border-radius:50%;background:rgba(140,135,123,.35);cursor:pointer;transition:.25s}
+#dots .d.on{background:var(--amber);transform:scale(1.35)}
+.counter-dark{color:var(--cream-dim)!important}.counter-light{color:var(--mute)!important}
+.hint{position:fixed;bottom:3.2vh;right:9vw;font-family:var(--sans);font-size:11px;color:var(--cream-dim);opacity:.6;z-index:39}
+@media(max-width:760px){.hub-wrap,.cards,.vs{grid-template-columns:1fr}.hub-stage{height:46vh}.ghost{font-size:42vw}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div id="deck"></div>
+<div id="count" class="counter-dark"><span id="cur">01</span> / <span id="tot">24</span></div>
+<div id="brand">How to Agencylife</div>
+<div id="dots"></div>
+<div id="nav"><button id="prev" aria-label="zur√ºck">&larr;</button><button id="next" aria-label="weiter">&rarr;</button></div>
+
+<script>
+const A='<em class="amber">', _A='</em>'; // amber italic helper
+const slides = [
+/*1*/{cls:'dark',html:`<div data-reveal><div class="t-how">HOW TO</div>
+  <div class="t-title">Agencylife</div>
+  <div class="sub" style="margin-top:0">Das h√§tte ich gern gewusst, bevor ich angefangen habe.</div>
+  <div class="t-meta" style="margin-top:3vh">Simon &nbsp;¬∑&nbsp; Client Service &nbsp;¬∑&nbsp; seit 4 Jahren hier</div></div>`},
+/*2*/{cls:'dark',k:'Mein erster Tag',html:`<div class="statement dim" data-reveal>9:03 Uhr.</div>
+  <div class="statement big" data-reveal style="margin:1vh 0">47 ungelesene Mails.</div>
+  <div class="statement dim" data-reveal style="font-size:clamp(20px,2.6vw,34px)">Drei mit <span class="amber">‚ÄûURGENT‚Äú</span> im Betreff.</div>`},
+/*3*/{cls:'dark',k:'Das erste Meeting',html:`<div class="statement big" data-reveal>Also nickte ich.</div>
+  <div class="sub" data-reveal style="color:var(--cream-dim);font-style:italic">Obwohl ich drei von f√ºnf W√∂rtern<br>nicht verstanden habe.</div>`},
+/*4*/{cls:'light',html:`<div class="statement" data-reveal>Wahrscheinlich kennst du<br>dieses Gef√ºhl <em class="amber">schon.</em></div>`},
+/*5*/{cls:'light',k:'Im ersten Jahr ist das hier normal',html:`<ul class="list">
+  <li data-reveal><span class="b"></span>Du nickst bei Abk√ºrzungen, die du nicht kennst.</li>
+  <li data-reveal><span class="b"></span>Du liest eine Mail f√ºnfmal, bevor du auf Senden gehst.</li>
+  <li data-reveal><span class="b"></span>Du klappst Freitag das Notebook zu ‚Äî und nichts ist ‚Äûfertig‚Äú.</li>
+  <li data-reveal><span class="b"></span>Du fragst dich, ob nur du noch nicht durchblickst.</li></ul>
+  <div class="kicker" data-reveal style="margin-top:3vh;margin-bottom:0">Spoiler: Es geht allen exakt so.</div>`},
+/*6*/{cls:'dark',k:'Mitmachen ¬∑ ganz ehrlich',html:`<div class="kicker" data-reveal style="margin-bottom:1.5vh">Hand hoch:</div>
+  <div class="statement" data-reveal>Wer hat heimlich das Gef√ºhl,<br>hier <em class="amber">nicht gut genug zu performen</em>?</div>
+  <div class="note" data-reveal>Behalt das Gef√ºhl. Am Ende zeige ich dir, warum es dein Vorteil ist.</div>`},
+/*7*/{cls:'dark',k:'Wenn du nur einen Satz mitnimmst',html:`<div class="statement" data-reveal>Am Anfang kommst du nicht √ºber <em class="amber">Wissen</em> voran.</div>
+  <div class="statement" data-reveal>Sondern √ºber <em class="amber">Beziehungen</em> und <em class="amber">Verl√§sslichkeit</em>.</div>
+  <div class="rule" data-reveal></div>
+  <div class="dim" data-reveal style="font-family:var(--serif);font-style:italic;font-size:clamp(17px,2vw,26px)">Und der Schl√ºssel zu beidem:</div>
+  <div class="statement big" data-reveal style="font-size:clamp(34px,5vw,64px)">die Maske abnehmen.</div>`},
+/*8*/{cls:'dark',divider:true,n:'01',title:'Vernetzen',sub:'Wie du in 90 Tagen zur bekanntesten Junior-Kraft wirst.'},
+/*9*/{cls:'light',k:'Die Wahrheit √ºber unseren Job',drehscheibe:true},
+/*10*/{cls:'light',k:'Dein Playbook f√ºr die ersten 90 Tage',html:`<div class="cards">
+  <div class="card" data-reveal><span class="num">01</span><h3>Kaffee-Tour.</h3><p>15 Min mit je einem Menschen aus jeder Unit. Frage: ‚ÄûWas nervt dich an Beratern?‚Äú</p></div>
+  <div class="card" data-reveal><span class="num">02</span><h3>Geben vor Nehmen.</h3><p>Hilf, bevor du das erste Mal selbst etwas brauchst. Dann ist jede Bitte leicht.</p></div>
+  <div class="card" data-reveal><span class="num">03</span><h3>Frag die zweite Person.</h3><p>Nicht immer den Lead ‚Äî die Erfahrene daneben wei√ü mehr und freut sich, gefragt zu werden.</p></div>
+  <div class="card" data-reveal><span class="num">04</span><h3>Iss nicht nur mit den Trainees.</h3><p>Setz dich bewusst zu den Units. 20 Min Mittag bauen mehr Beziehung als jedes Meeting.</p></div></div>`},
+/*11*/{cls:'dark',k:'Kurze Abstimmung',html:`<div class="statement big" data-reveal style="font-style:italic">‚ÄûFragen ist ein<br>Zeichen von Schw√§che.‚Äú</div>
+  <div class="kicker amber" data-reveal style="margin-top:3vh;margin-bottom:0">Daumen hoch oder runter?</div>`},
+/*12*/{cls:'light',html:`<div class="statement" data-reveal>Die Frage, die du dir <em class="amber">heute</em> nicht traust,</div>
+  <div class="statement" data-reveal>kostet dich <em class="amber">n√§chste Woche</em> zwei Stunden,</div>
+  <div class="statement" data-reveal>in denen du das Falsche baust.</div>
+  <div class="rule" data-reveal></div>
+  <div class="dim" data-reveal style="font-family:var(--serif);font-style:italic;font-size:clamp(16px,1.9vw,24px)">Schweigen ist nicht sicherer. Nur langsamer und teurer.</div>`},
+/*13*/{cls:'dark',divider:true,n:'02',title:'Schnell reinkommen',sub:'Wie aus ‚Äûkeine Ahnung‚Äú in Wochen ‚Äûdie fragen wir‚Äú wird.'},
+/*14*/{cls:'dark',html:`<div class="fail"><div class="big-n" data-reveal>3 Tage</div>
+  <div class="vs-word" data-reveal>gegen</div>
+  <div class="small-n" data-reveal>30 Sekunden.</div></div>`},
+/*15*/{cls:'light',k:'Schnell reinkommen ‚Äî was wirklich hilft',html:`<div class="rows">
+  <div class="row" data-reveal><span class="b"></span><div><h3>Bau dein eigenes Wiki.</h3><p>Jede Abk√ºrzung, jedes Aha. Nie zweimal dasselbe fragen m√ºssen ‚Äî der gr√∂√üte Hebel.</p></div></div>
+  <div class="row" data-reveal><span class="b"></span><div><h3>Lies r√ºckw√§rts.</h3><p>Alte Pr√§sentationen & Mediapl√§ne dieses Kunden. ‚ÄûWarum 60 % auf Social?‚Äú lehrt mehr als jedes Lehrbuch.</p></div></div>
+  <div class="row" data-reveal><span class="b"></span><div><h3>‚ÄûErkl√§r's mir wie einem F√ºnfj√§hrigen.‚Äú</h3><p>Und sag es in eigenen Worten zur√ºck. Da fliegen Missverst√§ndnisse sofort auf.</p></div></div>
+  <div class="row" data-reveal><span class="b"></span><div><h3>Lern zuerst die KPIs.</h3><p>TKP, CPC, ROAS, Reichweite & Frequenz ‚Äî die gemeinsame Sprache des Hauses.</p></div></div></div>`},
+/*16*/{cls:'dark',divider:true,n:'03',title:'Haltung',sub:'Echt sein schl√§gt perfekt sein. Jeden Tag.'},
+/*17*/{cls:'dark',k:'Die wichtigste Wahrheit √ºber den Job',html:`<div class="statement big" data-reveal><em class="amber">Verl√§sslichkeit</em></div>
+  <div class="statement big" data-reveal>schl√§gt Brillanz.</div>
+  <div class="rule" data-reveal></div>
+  <div class="dim" data-reveal style="font-family:var(--serif);font-style:italic;font-size:clamp(17px,2vw,26px)">Drei kluge Ideen sind weniger wert als zehn eingehaltene kleine Zusagen.</div>`},
+/*18*/{cls:'light',k:'Was keiner ins Handbuch schreibt',html:`<div class="rules">
+  <div class="r" data-reveal><h3>Bad news travel fast.</h3><p>Probleme meldest du als Erster ‚Äî sofort, mit L√∂sung.</p></div>
+  <div class="r" data-reveal><h3>No surprises.</h3><p>√úberrasch den Kunden nie. Auch nicht positiv im falschen Moment.</p></div>
+  <div class="r" data-reveal><h3>Antworte schnell ‚Äî auch ohne Antwort.</h3><p>‚ÄûHab's, melde mich bis 12 Uhr‚Äú schl√§gt zwei Tage Stille.</p></div>
+  <div class="r" data-reveal><h3>Owne deine Fehler.</h3><p>Sofort, ohne Schuldverlagerung, mit L√∂sung.</p></div></div>`},
+/*19*/{cls:'light',k:'Wo verl√§uft die Grenze zur Anbiederung?',html:`<div class="vs">
+  <div class="vs-col"><div class="vs-h echt" data-reveal>Echt</div>
+    <div class="vs-item echt" data-reveal>Du fragst, weil du es verstehen willst ‚Äî und merkst dir die Antwort.</div>
+    <div class="vs-item echt" data-reveal>‚ÄûDas wei√ü ich noch nicht ‚Äî ich finde es raus.‚Äú</div>
+    <div class="vs-item echt" data-reveal>‚ÄûDein Targeting hat die Pr√§si gerettet.‚Äú</div></div>
+  <div class="vs-col"><div class="vs-h auf" data-reveal>Aufgesetzt</div>
+    <div class="vs-item auf" data-reveal>Du suchst Vorw√§nde f√ºr ‚ÄûKaffee‚Äú, h√∂rst aber nicht zu.</div>
+    <div class="vs-item auf" data-reveal>Du nickst kompetent und bluffst dich durch.</div>
+    <div class="vs-item auf" data-reveal>‚ÄûSuper Arbeit, Team!‚Äú ‚Äî ohne zu wissen, was passiert ist.</div></div></div>`},
+/*20*/{cls:'dark',k:'An den gemischten Haufen hier',html:`<div class="dim" data-reveal style="font-family:var(--serif);font-size:clamp(18px,2.3vw,30px);font-style:italic">Manche denken: <span style="color:var(--cream);font-style:normal">‚ÄûIch kann noch nichts.‚Äú</span></div>
+  <div class="dim" data-reveal style="font-family:var(--serif);font-size:clamp(18px,2.3vw,30px);font-style:italic;margin-top:1.5vh">Andere: <span style="color:var(--cream);font-style:normal">‚ÄûIch kann die Theorie ‚Äî aber versage gleich in der Praxis.‚Äú</span></div>
+  <div class="rule" data-reveal></div>
+  <div class="statement" data-reveal>Beide halten den anderen f√ºr im Vorteil.</div>
+  <div class="statement" data-reveal><em class="amber">Beide irren.</em></div>`},
+/*21*/{cls:'light',k:'Alles dasselbe Prinzip',html:`<div class="kicker" data-reveal style="color:var(--mute);margin-bottom:2.5vh">Vernetzen. Schnell reinkommen. Haltung.</div>
+  <div class="statement big" data-reveal style="font-size:clamp(34px,5vw,60px)">H√∂r auf, souver√§n zu tun.</div>
+  <div class="statement big" data-reveal style="font-size:clamp(34px,5vw,60px);color:var(--amber-d)">Fang an, ehrlich zu fragen.</div>`},
+/*22*/{cls:'dark',k:'Jetzt seid ihr dran',html:`<div class="dim" data-reveal style="font-family:var(--serif);font-style:italic;font-size:clamp(18px,2vw,26px);margin-bottom:1.5vh">Handy oder Zettel.</div>
+  <div class="statement" data-reveal>Eine Sache, die du<br>diese Woche ausprobierst.</div>
+  <div data-reveal style="font-family:var(--serif);font-size:clamp(22px,3vw,38px);margin-top:2.5vh"><span class="dim" style="font-style:italic">Nicht zehn.</span> <em class="amber" style="font-weight:600">Eine.</em></div>`},
+/*23*/{cls:'dark',k:'Zur√ºck zum Anfang',html:`<div class="statement" data-reveal>Du wirst deine <em class="amber" style="font-style:normal;font-weight:500">47 Mails</em> kriegen.</div>
+  <div class="statement" data-reveal>Und du wirst sie schaffen ‚Äî</div>
+  <div class="dim" data-reveal style="font-family:var(--serif);font-style:italic;font-size:clamp(18px,2.2vw,30px);margin:1.5vh 0">nicht weil du alles wei√üt,</div>
+  <div class="statement" data-reveal>sondern weil du die Frage stellst,</div>
+  <div class="statement" data-reveal><em class="amber">die sich keiner traut.</em></div>`},
+/*24*/{cls:'light',k:'Deine Hausaufgabe f√ºr Woche 1',html:`<div class="statement big" data-reveal style="font-size:clamp(34px,5vw,62px)">Stell die eine Frage,</div>
+  <div class="statement big" data-reveal style="font-size:clamp(34px,5vw,62px);color:var(--amber-d)">vor der du dich dr√ºckst.</div>
+  <div class="rule" data-reveal></div>
+  <div data-reveal style="font-family:var(--serif);font-style:italic;font-size:clamp(17px,2vw,25px);color:var(--body)">Damit bist du den meisten Trainees ein Jahr voraus.</div>
+  <div class="kicker" data-reveal style="color:var(--mute);margin-top:4vh;margin-bottom:0;letter-spacing:.04em;text-transform:none;font-weight:400;font-family:var(--sans);font-size:13px">Jetzt geh√∂ren die letzten Minuten euch ‚Äî fragt mich irgendwas. Auch die ‚Äûdummen‚Äú. Besonders die.</div>`},
+];
+
+const UNITS=["Strategy / Planning","Mediaplanung","SEA / Search","Social","Programmatic","Data / Analytics","Ad Operations"];
+
+function buildSlide(s,i){
+  const el=document.createElement('section');
+  el.className='slide '+s.cls;
+  el.dataset.index=i;
+  el.innerHTML='<div class="grain"></div>';
+  const wrap=document.createElement('div');
+  wrap.style.position='relative';wrap.style.zIndex='2';wrap.style.width='100%';
+
+  if(s.divider){
+    wrap.innerHTML=`<div class="ghost" data-ghost data-fade>${s.n}</div><div class="divwrap">
+      <span class="tick" data-reveal></span>
+      <div class="div-title" data-reveal>${s.title}</div>
+      <div class="sub" data-reveal>${s.sub}</div></div>`;
+  } else if(s.drehscheibe){
+    let pills='';
+    UNITS.forEach((u,idx)=>{pills+=`<div class="pill" data-pill data-fade data-i="${idx}">${u}</div>`;});
+    let spokes='';UNITS.forEach((u,idx)=>{spokes+=`<div class="spoke" data-spoke data-fade data-i="${idx}"></div>`;});
+    wrap.innerHTML=`<div class="hub-wrap"><div class="hub-left">
+        ${s.k?`<div class="kicker" data-reveal>${s.k}</div>`:''}
+        <div class="statement" data-reveal>Du produzierst<br>nichts allein.</div>
+        <div class="sub" data-reveal style="color:var(--body);font-style:normal;font-family:var(--serif)">Du bist die <em class="amber" style="font-weight:600">Drehscheibe</em> ‚Äî deine Arbeit ist nur so gut wie die Zuarbeit, die du bekommst.</div>
+      </div>
+      <div class="hub-stage" data-stage>${spokes}<div class="hub-core" data-fade><b>DU</b><span>Berater</span></div>${pills}</div></div>`;
+  } else {
+    let h='';
+    if(s.k) h+=`<div class="kicker" data-reveal>${s.k}</div>`;
+    h+=s.html;
+    wrap.innerHTML=h;
+  }
+  el.appendChild(wrap);
+  // static stagger via transition-delay (re-plays automatically each time the slide becomes active)
+  [...el.querySelectorAll('[data-reveal]')].forEach((it,idx)=>{it.style.transitionDelay=(0.08+idx*0.07)+'s';});
+  [...el.querySelectorAll('[data-fade]')].forEach((it,idx)=>{it.style.transitionDelay=(0.12+idx*0.045)+'s';});
+  return el;
+}
+
+const deck=document.getElementById('deck');
+slides.forEach((s,i)=>deck.appendChild(buildSlide(s,i)));
+const slideEls=[...document.querySelectorAll('.slide')];
+document.getElementById('tot').textContent=String(slides.length).padStart(2,'0');
+
+// dots
+const dots=document.getElementById('dots');
+slides.forEach((s,i)=>{const d=document.createElement('div');d.className='d';d.dataset.i=i;
+  d.onclick=()=>go(i);dots.appendChild(d);});
+const dotEls=[...dots.children];
+
+let cur=0;
+
+function layoutHub(el){
+  const stage=el.querySelector('[data-stage]');if(!stage)return;
+  const pills=[...el.querySelectorAll('[data-pill]')];
+  const spokes=[...el.querySelectorAll('[data-spoke]')];
+  const W=stage.clientWidth,H=stage.clientHeight;
+  const cx=W/2,cy=H/2;const rx=Math.min(W*0.42,360),ry=Math.min(H*0.40,230);
+  const n=pills.length;
+  pills.forEach((p,idx)=>{
+    const ang=(-90+idx*(360/n))*Math.PI/180;
+    const x=cx+rx*Math.cos(ang),y=cy+ry*Math.sin(ang);
+    p.style.left=x+'px';p.style.top=y+'px';
+    const sp=spokes[idx];const len=Math.hypot(x-cx,y-cy);
+    sp.style.width=len+'px';sp.style.transform=`rotate(${Math.atan2(y-cy,x-cx)}rad)`;
+  });
+}
+
+function reveal(el){
+  // positioning only; the fade/slide-in is pure CSS, triggered by the .active class
+  if(el.querySelector('[data-stage]')) layoutHub(el);
+}
+
+function setChrome(i){
+  document.getElementById('bar').style.width=((i+1)/slides.length*100)+'%';
+  document.getElementById('cur').textContent=String(i+1).padStart(2,'0');
+  dotEls.forEach((d,k)=>d.classList.toggle('on',k===i));
+  const dark=slides[i].cls==='dark';
+  const cc=document.getElementById('count');cc.className=dark?'counter-dark':'counter-light';
+  document.getElementById('brand').style.color=dark?'var(--cream-dim)':'var(--mute)';
+  // nav button colors on light
+  document.querySelectorAll('#nav button').forEach(b=>{b.style.borderColor=dark?'rgba(244,240,232,.25)':'rgba(20,20,24,.2)';b.style.color=dark?'var(--cream-dim)':'var(--mute)';});
+}
+
+function go(i){
+  if(i<0||i>=slides.length||i===cur)return;
+  // incoming slide is shown INSTANTLY (opacity 1, never depends on a transition completing);
+  // outgoing slide softly fades out underneath. Robust even if transitions are frozen.
+  const prev=slideEls[cur];
+  prev.classList.remove('active');prev.classList.add('leaving');
+  setTimeout(()=>prev.classList.remove('leaving'),550);
+  slideEls[i].classList.add('active');
+  reveal(slideEls[i]);
+  cur=i;setChrome(i);
+}
+
+// init
+slideEls[0].classList.add('active');setChrome(0);reveal(slideEls[0]);
+
+document.getElementById('next').onclick=()=>go(cur+1);
+document.getElementById('prev').onclick=()=>go(cur-1);
+window.addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){e.preventDefault();go(cur+1);}
+  if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(cur-1);}
+  if(e.key==='Home')go(0);if(e.key==='End')go(slides.length-1);
+});
+let wheelLock=false;
+window.addEventListener('wheel',e=>{
+  if(wheelLock)return;if(Math.abs(e.deltaY)<24)return;
+  wheelLock=true;go(cur+(e.deltaY>0?1:-1));setTimeout(()=>wheelLock=false,750);
+},{passive:true});
+let tY=null;
+window.addEventListener('touchstart',e=>tY=e.touches[0].clientY,{passive:true});
+window.addEventListener('touchend',e=>{if(tY===null)return;const dy=tY-e.changedTouches[0].clientY;
+  if(Math.abs(dy)>50)go(cur+(dy>0?1:-1));tY=null;},{passive:true});
+window.addEventListener('resize',()=>{const el=slideEls[cur];if(el.querySelector('[data-stage]'))layoutHub(el);});
+</script>
+</body>
+</html>
